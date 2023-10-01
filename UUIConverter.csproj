@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Vendor\YamlDotNet\Portability\net35+unitysubset3.5+net45+net47\**" />
+    <Compile Remove="Vendor\YamlDotNet\Portability\net35+unitysubset3.5\**" />
+    <Compile Remove="Vendor\YamlDotNet\Portability\net45+net47\**" />
+    <Compile Remove="Vendor\YamlDotNet\Portability\netstandard2.0+netstandard2.1\**" />
+    <Compile Remove="Vendor\YamlDotNet\Portability\unitysubset3.5\**" />
+    <EmbeddedResource Remove="Vendor\YamlDotNet\Portability\net35+unitysubset3.5+net45+net47\**" />
+    <EmbeddedResource Remove="Vendor\YamlDotNet\Portability\net35+unitysubset3.5\**" />
+    <EmbeddedResource Remove="Vendor\YamlDotNet\Portability\net45+net47\**" />
+    <EmbeddedResource Remove="Vendor\YamlDotNet\Portability\netstandard2.0+netstandard2.1\**" />
+    <EmbeddedResource Remove="Vendor\YamlDotNet\Portability\unitysubset3.5\**" />
+    <None Remove="Vendor\YamlDotNet\Portability\net35+unitysubset3.5+net45+net47\**" />
+    <None Remove="Vendor\YamlDotNet\Portability\net35+unitysubset3.5\**" />
+    <None Remove="Vendor\YamlDotNet\Portability\net45+net47\**" />
+    <None Remove="Vendor\YamlDotNet\Portability\netstandard2.0+netstandard2.1\**" />
+    <None Remove="Vendor\YamlDotNet\Portability\unitysubset3.5\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="YamlDotNet" Version="13.4.0" />
+  </ItemGroup>
+
+</Project>
