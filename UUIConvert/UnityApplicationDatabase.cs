@@ -14,13 +14,19 @@ namespace UUIConvert
 {
     public class UnityApplicationDatabase
     {
+        public UnityScene LoadScene( string filename )
+        {
+            return UnityScene.FromFile( Path.Combine(basePath, filename), this );
+        }
+
+        string basePath = null;
         Dictionary<string,string> FileToGuid = new();
         Dictionary<string,string> GuidToFile = new();
 
         public void AddFile( string path, string metaPath )
         {
             //Log.Info($"parsing metadata: {path} {metaPath}");
-            var input = new StringReader(File.ReadAllText(metaPath));
+            var input = new StringReader( YAMLFixup.FixBlankKeys( File.ReadAllText(metaPath) ));
             var yaml = new YamlStream();
             try
             {
@@ -55,8 +61,10 @@ namespace UUIConvert
 
         public static UnityApplicationDatabase FromFolder( string path )
         {
+            
             UnityApplicationDatabase newDatabase = new UnityApplicationDatabase();
 
+            newDatabase.basePath = path;
             newDatabase.AddFolder( path );
 
             return newDatabase;

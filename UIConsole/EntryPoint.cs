@@ -17,7 +17,8 @@ namespace UUIConverter.Console
             
             //Application.Run(new UIConsole());
 
-            UnityApplicationDatabase.FromFolder(@"G:\Workspace\caves-of-qud-2021");
+            var database = UnityApplicationDatabase.FromFolder(@"G:\Workspace\caves-of-qud-2021");
+            var scene = database.LoadScene(@"Assets\Game\Game.unity");
         }
     }
 }
