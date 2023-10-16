@@ -6,10 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms.Design;
-using YamlDotNet.Serialization.NamingConventions;
-using YamlDotNet.Serialization;
-using YamlDotNet.RepresentationModel;
 using System.IO;
+using VYaml.Serialization;
 
 namespace UUIConvert
 {
@@ -21,18 +19,12 @@ namespace UUIConvert
 
             UnityScene newScene = new UnityScene();
 
-            var input = new StringReader( YAMLFixup.FixBlankKeys( File.ReadAllText(scenePath) ));
-            var yaml = new YamlStream();
-            try
-            {
-                yaml.Load(input);
+            var yaml = YamlSerializer.DeserializeMultipleDocuments<dynamic>(File.ReadAllBytes(scenePath));
 
-                var sceneRoot = yaml.Documents[0].RootNode;
-                ;
-            }
-            catch( Exception ex )
+            foreach( var rawObject in yaml )
             {
-                Log.Exception($"bad scene {scenePath}", ex);
+                var o = rawObject as Dictionary<object,object>;
+                Log.Info(o?.Keys.FirstOrDefault()?.ToString() ?? "<null>");
             }
 
             return newScene;

@@ -9,6 +9,8 @@ using System.Windows.Forms.Design;
 using YamlDotNet.Serialization.NamingConventions;
 using YamlDotNet.Serialization;
 using YamlDotNet.RepresentationModel;
+using VYaml;
+using VYaml.Serialization;
 
 namespace UUIConvert
 {
@@ -26,19 +28,18 @@ namespace UUIConvert
         public void AddFile( string path, string metaPath )
         {
             //Log.Info($"parsing metadata: {path} {metaPath}");
-            var input = new StringReader( YAMLFixup.FixBlankKeys( File.ReadAllText(metaPath) ));
-            var yaml = new YamlStream();
+
             try
             {
-                yaml.Load(input);
+                var yaml = YamlSerializer.Deserialize<dynamic>(File.ReadAllBytes(metaPath));
+                var guid = yaml["guid"];
 
-                var guid = ((YamlMappingNode)yaml.Documents[0].RootNode).Children["guid"].ToString().Trim();
                 FileToGuid.Add(path, guid);
                 GuidToFile.Add(guid, path);
             }
             catch( Exception ex )
             {
-                Log.Exception( $"bad metafile {metaPath}", ex );
+                Log.Exception($"bad metafile {metaPath}", ex);
             }
         }
 
