@@ -28,7 +28,6 @@
 
   <ItemGroup>
     <PackageReference Include="VYaml" Version="0.13.3" />
-    <PackageReference Include="YamlDotNet" Version="13.4.0" />
   </ItemGroup>
 
 </Project>

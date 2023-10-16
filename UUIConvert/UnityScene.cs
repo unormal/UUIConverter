@@ -13,6 +13,8 @@ namespace UUIConvert
 {
     public class UnityScene
     {
+        Dictionary<string, dynamic> membersByFileId = new Dictionary<string, dynamic>();
+
         public static UnityScene FromFile( string scenePath, UnityApplicationDatabase database )
         {
             if( !File.Exists(scenePath)) throw new FileNotFoundException();
